@@ -3,7 +3,7 @@ package routes
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
-	"github.com/kameshsampath/hybrid-cloud-backend/pkg/utils"
+	"github.com/kameshsampath/hybrid-cloud-backend-api/pkg/utils"
 	"log"
 	"net/http"
 	"strings"
