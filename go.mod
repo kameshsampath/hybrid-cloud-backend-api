@@ -1,4 +1,4 @@
-module github.com/kameshsampath/hybrid-cloud-backend
+module github.com/kameshsampath/hybrid-cloud-backend-api
 
 go 1.16
 
