@@ -1,0 +1,126 @@
+basePath: /v1/api
+definitions:
+  routes.Message:
+    properties:
+      request:
+        $ref: '#/definitions/routes.Request'
+      requestId:
+        description: RequestId the unique request id
+        type: string
+    type: object
+  routes.Request:
+    properties:
+      reverse:
+        description: Reverse   reverse Text
+        type: boolean
+      sleepMillis:
+        description: SleepMillis add some sleep to processing
+        type: integer
+      text:
+        description: Text is any text to process
+        type: string
+      upperCase:
+        description: Uppercase change the Text to uppercase
+        type: boolean
+    type: object
+  routes.Response:
+    properties:
+      cloudId:
+        description: CloudId the cloud which processed the request
+        type: string
+      requestId:
+        description: RequestId the request id
+        type: string
+      text:
+        description: Text the processed text with all applied transformations
+        type: string
+      workerId:
+        description: WorkerId the worker id
+        type: string
+    type: object
+  utils.HTTPError:
+    properties:
+      code:
+        example: 400
+        type: integer
+      message:
+        example: status bad request
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: kamesh.sampath@solo.io
+    name: Kamesh Sampath
+  description: The backend API that processes the message from frontend
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: Hybrid Cloud Demo Backend API
+  version: "1.0"
+paths:
+  /health/live:
+    get:
+      description: Checks the API liveness, can be used with Kubernetes Probes
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: Checks the API liveness
+      tags:
+      - health
+  /health/ready:
+    get:
+      description: Checks the API readiness, can be used with Kubernetes Probes
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: Checks the API readiness
+      tags:
+      - health
+  /process:
+    post:
+      consumes:
+      - application/json
+      description: process the request message from the front end and apply the needed
+        transformations
+      parameters:
+      - description: Message to process
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/routes.Message'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/routes.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/utils.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.HTTPError'
+      summary: process the request message
+      tags:
+      - backend
+schemes:
+- http
+- https
+swagger: "2.0"
