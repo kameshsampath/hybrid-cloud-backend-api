@@ -1,0 +1,28 @@
+= Hybrid Cloud Backend
+
+The background API that will be used with https://github.com/kameshsampath/solo-hybrid-cloud-demo[Gloo Hybrid Cloud Demo]
+
+== Pre-requisites
+
+* https://docs.docker.com/desktop/[Docker Desktop]
+* https://kubernetes.io/docs/tasks/tools[kubectl]
+* https://httpie.io[httpie]
+* Kubernetes Cluster e.g https://kind.sigs.k8s.io[KinD]
+* [Gloo Edge](https://docs.solo.io/gloo-edge/latest/getting_started/
+
+== Deploy API
+
+[source,shell]
+----
+kubectl apply -k config/app
+
+----
+
+== API
+
+[source,shell]
+----
+docker run -it --rm --name=hybrid-cloud-backend-api -p 8080:8080 ghcr.io/kameshsampath/hybrid-cloud-backend-api
+----
+
+Open the http://localhost:8080/swagger/index.html[Swagger] url on the browser to see the REST paths that are available

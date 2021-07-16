@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	_ "github.com/kameshsampath/hybrid-cloud-backend-api/docs"
@@ -17,7 +18,8 @@ import (
 )
 
 var (
-	router *gin.Engine
+	router   *gin.Engine
+	httpPort = "8080"
 )
 
 // @title Hybrid Cloud Demo Backend API
@@ -50,9 +52,12 @@ func main() {
 	}))
 
 	addRoutes()
+	if hPort := os.Getenv("HTTP_LISTEN_PORT"); hPort != "" {
+		httpPort = hPort
+	}
 	server := &http.Server{
 		Handler: router,
-		Addr:    ":8080",
+		Addr:    fmt.Sprintf(":%s", httpPort),
 	}
 
 	// Initializing the server in a goroutine so that

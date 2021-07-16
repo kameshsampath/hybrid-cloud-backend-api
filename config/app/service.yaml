@@ -8,4 +8,4 @@ spec:
     version: v1.0
   ports:
     - port: 8080
-  type: NodePort
+  type: ClusterIP

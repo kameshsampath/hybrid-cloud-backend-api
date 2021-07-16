@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: hybrid-cloud-backend-api
-          image: ko://github.com/kameshsampath/hybrid-cloud-backend-api/cmd
+          image: ko://github.com/kameshsampath/hybrid-cloud-backend-api
           imagePullPolicy: Always
           env:
             - name: GIN_MODE
