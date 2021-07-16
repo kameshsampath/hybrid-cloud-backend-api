@@ -13,7 +13,7 @@ RUN go mod download
 COPY . ./
 # Build the binary.
 # -mod=readonly ensures immutable go.mod and go.sum in container builds.
-RUN CGO_ENABLED=0 GOOS=linux go build -mod=readonly -v -o fruits-api
+RUN CGO_ENABLED=0 GOOS=linux go build -mod=readonly -v -o hybrid-cloud-backend-api
 # Use the official Alpine image for a lean production container.
 # https://hub.docker.com/_/alpine
 # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
